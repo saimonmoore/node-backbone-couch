@@ -1,0 +1,26 @@
+{
+  "author": "Saimon Moore <saimonmoore@gmail.com> (http://saimonmoore.net)",
+  "name": "backbone-couch",
+  "description": "A CouchDB sync adaptor for Backbone",
+  "version": "0.0.1",
+  "homepage": "https://github.com/saimonmoore/node-backbone-couch",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/saimonmoore/node-backbone-couch.git"
+  },
+  "keywords": ["couchdb", "backbone", "couch"],
+  "main": "index",
+  "engines": {
+    "node": ">=0.4.5"
+  },
+  "dependencies": {
+    "backbone": ">= 0.5.1",
+    "underscore": ">= 1.1.7",
+    "cradle": ">= 0.5.5"
+  },
+  "devDependencies": {
+    "testosterone": "1.3.0",
+    "gently": "0.9.1",
+    "funk": "1.5.0"
+  }
+}
