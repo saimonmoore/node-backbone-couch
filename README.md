@@ -49,7 +49,7 @@ BackboneCouch.connection_data = {
 
 //Define your Backbone models/collections
 var User = Backbone.Model.extend({})
-,  	UsersCollection = Backbone.Collection.extend({url: 'users/all', model: User});
+,  	UsersCollection = Backbone.Collection.extend({view_name: 'users/all', model: User});
 
 ```
 
@@ -129,7 +129,7 @@ drfoo.destroy(false, {success: onDestroy});
 
 
 ```javascript
-//UsersCollection = Backbone.Collection.extend({url: 'users/all', model: User});
+//UsersCollection = Backbone.Collection.extend({view_name: 'users/all', model: User});
 
 UsersCollection.add(drfoo);
 
@@ -155,14 +155,14 @@ a basic view (which will emit all documents whose collection attribute is
 'users') for us and then populated the collection with models from the
 results returned by the view.
 
-Note: By changing the 'url' property you can back collections with
+Note: By changing the 'view_name' property you can back collections with
 different views.
 
 You can pass any view parameters via a 'view_opts' key in the 'options'
 argument e.g.
 
 ```javascript
-Fruit = Backbone.Collection.extend({url: 'fruit/by_fruit_name', model: Fruit});
+Fruit = Backbone.Collection.extend({view_name: 'fruit/by_fruit_name', model: Fruit});
 
 Fruit.add([oranges, lemons]);
 

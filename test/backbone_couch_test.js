@@ -8,7 +8,7 @@ var tests = require('testosterone')( { sync: true, title: 'node-backbone-couch/t
 
 var BackboneCouch
 ,   User = Backbone.Model.extend({})
-,  	UsersCollection = Backbone.Collection.extend({url: 'users/all', model: User})
+,  	UsersCollection = Backbone.Collection.extend({view_name: 'users/all', model: User})
 ,   stubCradleConnection = function() {
 		var Connection = gently.stub('cradle','Connection')
 		, connection = {

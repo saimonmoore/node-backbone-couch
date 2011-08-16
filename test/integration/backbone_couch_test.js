@@ -6,7 +6,7 @@ var tests = require('testosterone')( { sync: false, title: 'node-backbone-couch/
 
 var BackboneCouch
 ,   User = Backbone.Model.extend({})
-,  	UsersCollection = Backbone.Collection.extend({url: 'users/all', model: User})
+,  	UsersCollection = Backbone.Collection.extend({view_name: 'users/all', model: User})
 ,   DBName = 'backbone_couch_test'
 ,   Connection = new(cradle.Connection)
 ,   DB = Connection.database(DBName);
@@ -139,7 +139,7 @@ cleanup(function() {
         }
       };
 
-      var	Children = Backbone.Collection.extend({url: 'users/by_age', model: User});
+      var	Children = Backbone.Collection.extend({view_name: 'users/by_age', model: User});
 
 			var Mario = new User({name: 'Mario', age: 1})
 			,   Sofia = new User({name: 'Sofia', age: 3})
