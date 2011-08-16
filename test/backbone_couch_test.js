@@ -14,7 +14,7 @@ var BackboneCouch
 		, connection = {
 			  database: function(name){
 					return {
-						exists: function(cb) { cb(true);}
+						exists: function(cb) { cb(false, true);}
 					  , save : function() {
 						}
 					}
@@ -32,7 +32,7 @@ var BackboneCouch
       var document
 		  ,  _doc = { _rev: '2-76be', _id: 'f6av8', name: 'Mario'}
 			database = {
-				exists: function(cb) {cb(true);}
+				exists: function(cb) {cb(false, true);}
 				, save : function(attributes, cb){
 							   document = new(cradle.Response)(_doc);
 								 if (cb) {
