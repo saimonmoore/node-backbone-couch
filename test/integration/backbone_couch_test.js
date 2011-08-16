@@ -129,17 +129,17 @@ cleanup(function() {
 			BackboneCouch.db_name = DBName;
 			BackboneCouch._connection = BackboneCouch._db = false;
 
-      var views = {
-        'by_age': {
+      var	Children = Backbone.Collection.extend({
+          view_name: 'users/by_age'
+        , view: {
           "map": function(doc) {
                  if (doc.age) {
                    emit(doc.age, doc);
                  }
           }
         }
-      };
-
-      var	Children = Backbone.Collection.extend({view_name: 'users/by_age', model: User});
+        , model: User
+      });
 
 			var Mario = new User({name: 'Mario', age: 1})
 			,   Sofia = new User({name: 'Sofia', age: 3})
@@ -168,28 +168,13 @@ cleanup(function() {
         }
 			};
 
-      var db = Connection.database(DBName);
+      function onSaveMario(model, resp) {
+        _.each([Sofia, Jan, Nil], function(model) {
+          model.save(false, {success: onSave});
+        });
+			};
 
-      function createDBView(error, response) {
-        if (!error) {
-          db.save('_design/users', views, function(err, resp, status) {
-            if (!err) {
-              _.each(models, function(model) {
-                model.save(false, {success: onSave});
-              });
-            }
-          });
-        }
-      }
-
-      db.exists(function(ok) {
-        if (!ok) {
-          db.create(createDBView);
-        }
-        else {
-          createDBView(false);
-        }
-      });
+      Mario.save(false, {success: onSaveMario});
 		})
 
 		.add('should reset model data from the couch when calling model.fetch()', function (next) {
