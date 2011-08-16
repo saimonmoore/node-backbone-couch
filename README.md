@@ -22,6 +22,9 @@ database.
 i.e. It is designed to be used when using
 [Backbone.js](http://documentcloud.github.com/backbone/) on the server side with node.
 
+Uses [cradle](http://github.com/cloudhead/cradle) to handle interfacing
+with couchdb.
+
 ## Install
 
     npm install node-backbone-couch
@@ -33,6 +36,16 @@ var Backbone = require('backbone')
 
 //Set the db_name otherwise it defaults to 'backbone_couch'
 BackboneCouch.db_name = 'couchfoo';
+
+//Set the couchdb connection data if distinct from default
+BackboneCouch.connection_data = {
+        host: '127.0.0.1'
+        , port: 5984
+        , options: { //Cradle-specific options
+            cache: true
+          , raw: false
+        }
+    }
 
 //Define your Backbone models/collections
 var User = Backbone.Model.extend({})
