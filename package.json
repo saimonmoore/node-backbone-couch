@@ -2,7 +2,7 @@
   "author": "Saimon Moore <saimonmoore@gmail.com> (http://saimonmoore.net)",
   "name": "node-backbone-couch",
   "description": "A CouchDB sync adaptor for Backbone",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/saimonmoore/node-backbone-couch",
   "repository": {
     "type": "git",
