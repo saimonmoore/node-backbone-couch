@@ -9,7 +9,7 @@
     "url": "git://github.com/saimonmoore/node-backbone-couch.git"
   },
   "keywords": ["couchdb", "backbone", "couch"],
-  "main": "index",
+  "main": "./lib/backbone_couch",
   "engines": {
     "node": ">=0.4.5"
   },
