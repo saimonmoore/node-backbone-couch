@@ -1,7 +1,7 @@
 var tests = require('testosterone')( { sync: true, title: 'node-backbone-couch/test/backbone_couch_test.js'})
 ,   assert = tests.assert
 ,   gently = global.GENTLY = new (require('gently'))
-, 	cradle = require('cradle')
+, 	cradle = require('saimonoore-cradle')
 , 	_ =  require('underscore')
 , 	Backbone = require('backbone');
 

@@ -1,6 +1,6 @@
 var tests = require('testosterone')( { sync: false, title: 'node-backbone-couch/test/integration/backbone_couch_test.js'})
 ,   assert = tests.assert
-, 	cradle = require('cradle')
+, 	cradle = require('saimonmoore-cradle')
 , 	_ =  require('underscore')
 , 	Backbone = require('backbone');
 
@@ -175,6 +175,52 @@ cleanup(function() {
 			};
 
       Mario.save(false, {success: onSaveMario});
+		})
+		.add('should properly update existing design docs when creating views', function (next) {
+			BackboneCouch = require('./../../lib/backbone_couch').sync(Backbone);
+			BackboneCouch.db_name = DBName;
+			BackboneCouch._connection = BackboneCouch._db = false;
+
+      var	ByAge = Backbone.Collection.extend({
+          view_name: 'users/by_age'
+        , view: {
+          "map": function(doc) {
+                 if (doc.age) {
+                   emit(doc.age, doc);
+                 }
+          }
+        }
+        , model: User
+      });
+
+      var	BySex = Backbone.Collection.extend({
+          view_name: 'users/by_sex'
+        , view: {
+          "map": function(doc) {
+                 if (doc.sex) {
+                   emit(doc.sex, doc);
+                 }
+          }
+        }
+        , model: User
+      });
+
+      var count = 0;
+
+      function onFetch(viewName) {
+        return function(collection, resp) {
+          DB.head('_design/users/_view/' + viewName, function(err, resp, status) {
+            count++;
+            assert.equal(status, 200);
+            if (count === 2) {
+              cleanup(next);
+            }
+          });
+        }
+      };
+
+      new ByAge().fetch({success: onFetch('by_age')});
+      new BySex().fetch({success: onFetch('by_sex')});
 		})
 
 		.add('should reset model data from the couch when calling model.fetch()', function (next) {
