@@ -149,6 +149,16 @@ cleanup(function() {
       var Kids = new Children([Mario, Sofia, Jan, Nil]);
       assert.equal(Kids.length, 4);
 
+      function onFetchAgain(toddlers, resp) {
+        assert.equal(toddlers.length, 2);
+
+        var names = _(toddlers.models).chain().map(function(model) { 
+          return model.get('name');}).sortBy(function(name) { return name;});
+
+        assert.deepEqual(['Jan', 'Sofia'], names.value());
+        cleanup(next);
+      };
+
       function onFetch(toddlers, resp) {
         assert.equal(toddlers.length, 2);
 
@@ -156,7 +166,8 @@ cleanup(function() {
           return model.get('name');}).sortBy(function(name) { return name;});
 
         assert.deepEqual(['Mario', 'Nil'], names.value());
-        cleanup(next);
+
+        Kids.fetch({success: onFetchAgain, view_opts: {key: 3}});
       };
 
       var models = Kids.models
